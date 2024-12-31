@@ -147,7 +147,7 @@
         .gray-dot {
             @apply rounded-full bg-gray-500 p-1.5
         }
-        
+
         .graylight-dot {
             @apply rounded-full bg-gray-300 p-1.5
         }
@@ -161,6 +161,10 @@
 
 {% block layout %}
 {% endblock %}
+
+{% if user.is_authenticated %}
+    <footer hx-ext="ws" ws-connect="/ws/online-status/"></footer>
+{% endif %}
 
 {% block javascript %}{% endblock %}
 

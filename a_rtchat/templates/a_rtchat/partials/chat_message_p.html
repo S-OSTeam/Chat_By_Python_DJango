@@ -1,6 +1,7 @@
 <div id="chat_messages" hx-swap-oob="beforeend">
+
     <div class="fade-in-up">
-        {% include 'a_rtchat/chat_message.html' %}
+        {% include 'a_rchat/chat_message.html' %}
     </div>
 
     <style>
@@ -20,5 +21,21 @@
         }
     </style>
 
-    <script>scrollToBottom()</script>
+    <script>
+        function scrollToBottom() {
+            const container = document.getElementById('chat_container')
+            container.scrollTop = container.scrollHeight
+        }
+
+        scrollToBottom()</script>
+
 </div>
+
+
+{% with user=message.author %}
+    {% if user in chat_group.users_online.all %}
+        <div id="user-{{ user.id }}" class="green-dot border-2 border-gray-800 absolute -bottom-1 -right-1"></div>
+    {% else %}
+        <div id="user-{{ user.id }}" class="gray-dot border-2 border-gray-800 absolute -bottom-1 -right-1"></div>
+    {% endif %}
+{% endwith %}
